@@ -8,3 +8,13 @@ wheels/
 
 # Virtual environments
 .venv
+
+# 환경변수
+.env
+
+# IDE
+.idea/
+.vscode/
+
+# 로컬 이미지 저장
+uploads/

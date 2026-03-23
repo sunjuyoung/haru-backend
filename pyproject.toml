@@ -1,0 +1,19 @@
+[project]
+name = "haru-server"
+version = "0.1.0"
+description = "하루일기 백엔드 — AI 다이어리 플랫폼"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "crewai==0.201.0",
+    "fastapi>=0.135.1",
+    "uvicorn>=0.42.0",
+    "sqlalchemy[asyncio]>=2.0",
+    "asyncpg>=0.30.0",
+    "alembic>=1.15.0",
+    "pydantic-settings>=2.0",
+    "python-dotenv>=1.0",
+    "google-auth>=2.49.1",
+    "replicate>=1.0.7",
+    "boto3>=1.42.73",
+]

@@ -1,0 +1,20 @@
+## 로컬 개발용 Docker Compose
+## PostgreSQL만 컨테이너로 실행 (FastAPI, Next.js는 로컬에서 직접 실행)
+## 실행: docker compose up -d
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: haru-postgres
+    restart: unless-stopped
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: rnrdj123
+      POSTGRES_DB: haru
+    volumes:
+      - haru_pgdata:/var/lib/postgresql/data
+
+volumes:
+  haru_pgdata:
