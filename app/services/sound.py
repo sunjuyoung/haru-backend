@@ -28,19 +28,18 @@ DEFAULT_SOUND = "pencil_default.mp3"
 def match_sound(primary_emotion: str) -> str:
     """
     감정에 맞는 사운드 키 반환
-    - 정확히 매칭되는 감정이 없으면 기본 사운드 반환
-    - 한글 감정명은 영어 매핑 후 조회 (확장 가능)
+
+    [임시] 현재 pencil_default.mp3만 존재하므로 항상 기본 사운드 반환
+    TODO: 사운드 에셋 추가 후 아래 매칭 로직 복원
     """
-    # 소문자로 정규화
-    emotion_lower = primary_emotion.lower().strip()
-
-    # 직접 매칭
-    if emotion_lower in SOUND_MAP:
-        return SOUND_MAP[emotion_lower]
-
-    # 부분 매칭 (예: "deep sadness" → "sadness")
-    for key in SOUND_MAP:
-        if key in emotion_lower:
-            return SOUND_MAP[key]
-
+    # [임시] 모든 감정에 pencil_default.mp3 사용
     return DEFAULT_SOUND
+
+    # --- 아래는 사운드 에셋 추가 후 복원할 로직 ---
+    # emotion_lower = primary_emotion.lower().strip()
+    # if emotion_lower in SOUND_MAP:
+    #     return SOUND_MAP[emotion_lower]
+    # for key in SOUND_MAP:
+    #     if key in emotion_lower:
+    #         return SOUND_MAP[key]
+    # return DEFAULT_SOUND

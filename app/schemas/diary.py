@@ -76,7 +76,7 @@ class DiaryListItem(BaseModel):
     id: uuid.UUID
     written_date: date
     content_preview: str = Field(description="일기 내용 앞 50자")
-    is_overwrite: bool
+    poetic_title: str | None = Field(default=None, description="시적 제목 (AI 생성 결과)")
     has_result: bool = Field(description="AI 생성 결과 존재 여부")
     created_at: datetime
 

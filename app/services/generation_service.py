@@ -26,7 +26,8 @@ from app.utils.sse import sse_event
 logger = logging.getLogger(__name__)
 
 # "존재하지 않은 기억" 생성 임계값 (v2.3)
-REGRET_THRESHOLD = 0.6
+# TODO: 사운드 에셋 추가 후 0.6으로 복원
+REGRET_THRESHOLD = 0.3
 
 
 def should_generate_memory(emotion: EmotionAnalysis) -> bool:
@@ -92,7 +93,8 @@ async def run_memory_agent_safe(content: str, emotion: EmotionAnalysis):
     부가 에이전트이므로 실패해도 전체 파이프라인에 영향 없음
     """
     try:
-        result = await run_agent_with_timeout(rewrite_memory, content, emotion, timeout=60)
+        # 텍스트 생성 + 10초 대기(Replicate rate limit) + 이미지 생성 고려하여 timeout 180초
+        result = await run_agent_with_timeout(rewrite_memory, content, emotion, timeout=180)
         return result
     except asyncio.TimeoutError:
         logger.warning("Agent 5 (Memory Rewriter) timed out")
@@ -139,6 +141,7 @@ async def save_generation_results(
             memory = Memory(
                 diary_id=diary.id,
                 rewritten_scene=memory_result.rewritten_scene,
+                memory_image_url=memory_result.memory_image_url,
             )
             db.add(memory)
 

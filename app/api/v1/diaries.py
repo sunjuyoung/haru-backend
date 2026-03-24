@@ -74,7 +74,11 @@ async def list_diaries_endpoint(
             id=d.id,
             written_date=d.written_date,
             content_preview=d.content[:50],
-            is_overwrite=d.is_overwrite,
+            poetic_title=(
+                d.result.poetic_title
+                if d.result and d.result.deleted_at is None
+                else None
+            ),
             has_result=d.result is not None and d.result.deleted_at is None,
             created_at=d.created_at,
         )
